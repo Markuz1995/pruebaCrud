@@ -1,11 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>Información del sitio</title>
+    <title>Reporte de usuarios por país</title>
 </head>
 <body>
-<p>Se ha agregado un nuevo usuario {{ $user->names }},</p>
-
+<h1>Reporte de usuarios por país</h1>
+<table>
+    <thead>
+    <tr>
+        <th>País</th>
+        <th>Número de usuarios</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach($usersByCountry as $user)
+        <tr>
+            <td>{{ $user->country }}</td>
+            <td>{{ $user->total }}</td>
+        </tr>
+    @endforeach
+    </tbody>
+</table>
 </body>
 </html>

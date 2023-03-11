@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AdminEmail;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
@@ -10,6 +11,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\WelcomeEmail;
@@ -80,6 +82,7 @@ class UserController extends Controller
         $user = User::create($request->all());
 
         Mail::to($user->email)->send(new WelcomeEmail($user));
+        $this->usersByCountry();
 
         return redirect()->route('users.index')
             ->with('success', 'Registro creado.');
@@ -131,5 +134,15 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->route('users.index')->with('success', 'Usuario eliminado correctamente');
+    }
+
+    private function usersByCountry()
+    {
+
+        $usersByCountry = DB::table('users')
+            ->select('country', DB::raw('count(*) as total'))
+            ->groupBy('country')
+            ->get();
+        Mail::to(env('ADMIN_EMAIL'))->send(new AdminEmail($usersByCountry));
     }
 }

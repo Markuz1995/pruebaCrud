@@ -30,6 +30,5 @@ class EventServiceProvider extends ServiceProvider
         parent::boot();
 
         Event::listen(UserCreated::class, SendWelcomeEmail::class);
-        Event::listen(UserCreated::class, SendAdminNotification::class);
     }
 }

@@ -11,15 +11,16 @@ class AdminEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $user;
+    public $usersByCountry;
 
-    public function __construct($user)
+    public function __construct($usersByCountry)
     {
-        $this->user = $user;
+        $this->usersByCountry = $usersByCountry;
     }
 
     public function build()
     {
-        return $this->view('emails.admin');
+        return $this->view('emails.admin')
+            ->with(['usersByCountry' => $this->usersByCountry]);
     }
 }
