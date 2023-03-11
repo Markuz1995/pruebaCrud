@@ -47,15 +47,5 @@ En el archivo `.env` se deben configurar las siguientes variables de entorno:
 ### Correo electrónico
 
 Se debe configurar el servicio de correo electrónico para poder enviar correos desde la aplicación. Las variables de entorno relacionadas con el correo electrónico se describen en la sección anterior.
+Se recomienda realizar pruebas con mailhog.
 
-## Uso
-
-Descripción de cómo utilizar la aplicación, cómo iniciarla, cómo interactuar con ella, etc.
-
-## Contribución
-
-Descripción de cómo contribuir al proyecto, cómo hacer cambios, cómo proponer mejoras, etc.
-
-## Licencia
-
-Descripción de la licencia del proyecto.
